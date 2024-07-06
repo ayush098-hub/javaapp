@@ -1,6 +1,7 @@
 <html>
 <body>
 <h2>This is homepage</h2>
-<a href="about.jsp">About Page</a>
+<a href="about.jsp">Clcik here to go on about page</a>
+<a href="service.jsp">Servie pagse</a>
 </body>
 </html>
