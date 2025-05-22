@@ -27,5 +27,11 @@ pipeline {
             sh "${MAVEN_HOME}/bin/mvn package"
         }
     }
+         stage("build & SonarQube analysis") {
+            steps {
+              withSonarQubeEnv('SonarQube') {
+                sh "${MAVEN_HOME}/bin/mvn clean package sonar:sonar"
+              }
+            }
     }
 }
