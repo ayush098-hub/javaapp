@@ -18,7 +18,7 @@ pipeline {
         }
         stage("Package"){
             steps{
-            mvhome= tool name: 'mvn', type: 'maven'
+            mvhome= '/opt/apache-maven-3.9.9/'
             sh "${mvhome}/bin/mvn package"
         }
     }
