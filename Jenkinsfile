@@ -10,10 +10,8 @@
 
 pipeline {
     agent any
-
     environment {
         MAVEN_HOME = '/opt/apache-maven-3.9.9'
-        qualitygate = waitForQualityGate()
     }
     
     stages {
@@ -22,20 +20,21 @@ pipeline {
                 checkout scm
             }
         }
-        stage("Package"){
-            steps{
-            
-            sh "${MAVEN_HOME}/bin/mvn package"
-        }
-    }
-         stage("build & SonarQube analysis") {
+        
+        stage("Package") {
             steps {
-              withSonarQubeEnv('SonarQube') {
-                sh "${MAVEN_HOME}/bin/mvn clean package sonar:sonar"
-              }
+                sh "${MAVEN_HOME}/bin/mvn package"
             }
-         }
-
+        }
+        
+        stage("Build & SonarQube Analysis") {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "${MAVEN_HOME}/bin/mvn clean package sonar:sonar"
+                }
+            }
+        }
+        
         stage("Quality Gate") {
             steps {
                 script {
@@ -45,7 +44,6 @@ pipeline {
                     }
                 }
             }
+        }
     }
-    }
-    
 }
