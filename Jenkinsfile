@@ -3,6 +3,7 @@ stage('checkout'){
 checkout scm
 }
 stage('build'){
-sh 'mvn package'
+def mvhome= tool name: 'mvn', type: 'maven'
+sh '${mvhome}/bin/mvn package'
 }
 }
