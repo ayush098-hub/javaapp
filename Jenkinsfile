@@ -18,7 +18,7 @@ pipeline {
         }
         stage("Package"){
             steps{
-            def mvhome= tool name: 'mvn', type: 'maven'
+            mvhome= tool name: 'mvn', type: 'maven'
             sh "${mvhome}/bin/mvn package"
         }
     }
