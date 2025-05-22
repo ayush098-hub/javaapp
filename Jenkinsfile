@@ -1,6 +1,6 @@
 node{
 stage('checkout'){
-git 'https://github.com/ayush098-hub/javaapp/'
+checkout scm
 }
 stage('build'){
 sh 'mvn package'
