@@ -33,5 +33,6 @@ pipeline {
                 sh "${MAVEN_HOME}/bin/mvn clean package sonar:sonar"
               }
             }
+         }
     }
 }
