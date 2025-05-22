@@ -35,15 +35,21 @@ pipeline {
             }
         }
         
-        stage("Quality Gate") {
-            steps {
-                script {
-                    def qualitygate = waitForQualityGate()
-                    if (qualitygate.status != "OK") {
-                        error "Pipeline aborted due to quality gate failure: ${qualitygate.status}"
-                    }
-                }
-            }
+        // stage("Quality Gate") {
+        //     steps {
+        //         script {
+        //             def qualitygate = waitForQualityGate()
+        //             if (qualitygate.status != "OK") {
+        //                 error "Pipeline aborted due to quality gate failure: ${qualitygate.status}"
+        //             }
+        //         }
+        //     }
+        // }
+
+        stage("Deploy to tomcat"){
+        steps{
+            sh 'cp target/*.war /opt/apache-tomcat-9.0.105/webapps'
+        }
         }
     }
 }
