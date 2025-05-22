@@ -10,6 +10,11 @@
 
 pipeline {
     agent any
+
+    environment {
+        MAVEN_HOME = '/opt/apache-maven-3.9.9'
+    }
+    
     stages {
         stage('Checkout') {
             steps {
@@ -18,8 +23,8 @@ pipeline {
         }
         stage("Package"){
             steps{
-            mvhome= '/opt/apache-maven-3.9.9/'
-            sh "${mvhome}/bin/mvn package"
+            
+            sh "${MAVEN_HOME}/bin/mvn package"
         }
     }
     }
