@@ -13,6 +13,7 @@ pipeline {
 
     environment {
         MAVEN_HOME = '/opt/apache-maven-3.9.9'
+        qualitygate = waitForQualityGate()
     }
     
     stages {
@@ -34,5 +35,15 @@ pipeline {
               }
             }
          }
+
+        stage("Quality Gate") {
+            steps {
+                script {
+                    def qualitygate = waitForQualityGate()
+                    if (qualitygate.status != "OK") {
+                        error "Pipeline aborted due to quality gate failure: ${qualitygate.status}"
+                    }
+                }
+            }
     }
 }
